@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      target: builder
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/todoapp
+      - NODE_ENV=test
+    depends_on:
+      - mongodb
+    networks:
+      - todo-network
+    command: npm run test
+
+  mongodb:
+    image: mongo:6
+    networks:
+      - todo-network
+
+networks:
+  todo-network:
+    driver: bridge
