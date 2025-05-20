@@ -5,11 +5,8 @@ services:
     build:
       context: .
       target: builder
-    environment:
-      - MONGODB_URI=mongodb://mongodb:27017/todoapp
-      - NODE_ENV=test
-    depends_on:
-      - mongodb
+    env_file:
+      - .env
     networks:
       - todo-network
     command: npm run test
